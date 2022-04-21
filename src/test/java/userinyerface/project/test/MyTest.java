@@ -5,20 +5,27 @@ import userinyerface.project.pages.SecondPage;
 import userinyerface.project.pages.WelcomePage;
 
 public class MyTest extends BaseTest {
+    WelcomePage welcomePage = new WelcomePage();
+    FirstPage firstPage = new FirstPage();
+    SecondPage secondPage = new SecondPage();
 
     @Test
     public void Authorization() throws InterruptedException {
-        WelcomePage welcomePage = new WelcomePage();
         welcomePage.open();
         welcomePage.clickHere();
-
-        FirstPage firstPage = new FirstPage();
         firstPage.dataEntry();
-
-        SecondPage secondPage = new SecondPage();
         secondPage.selectCategories();
         secondPage.uploadImage();
         secondPage.clickNext();
     }
 
+    @Test
+    public void CheckPopupAndTimer() {
+        welcomePage.open();
+        welcomePage.clickHere();
+        firstPage.closeCookie();
+        firstPage.closeHelpForm();
+        firstPage.counterData();
+        firstPage.updateDataTimer();
+    }
 }

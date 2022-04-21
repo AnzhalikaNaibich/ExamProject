@@ -1,6 +1,8 @@
 package userinyerface.project.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.Random;
@@ -31,5 +33,6 @@ public class SecondPage extends BasePage {
 
     public void clickNext() {
         nextSecondPage.click();
+        Assert.assertEquals(browser.getDriver().getCurrentUrl(), "https://userinyerface.com/game.html", "second page doesn't open");
     }
 }

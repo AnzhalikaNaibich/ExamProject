@@ -1,8 +1,16 @@
 package userinyerface.project.pages;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+
 import java.util.Random;
 
 public class FirstPage extends BasePage {
+    private Button no = new Button(By.xpath("//*[@id=\"app\"]/div/div[1]/div/div[2]/div/div[1]/button"), "no");
+    private Button helpForm = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div/div/div[2]/button/span[2]"), "helpForm");
+    private TextElement timer = new TextElement(By.className("timer"), "timer");
     private TextElement password = new TextElement(By.xpath("//input[@placeholder='Choose Password']"), "password");
     private TextElement email = new TextElement(By.xpath("//input[@placeholder='Your email']"), "email");
     private TextElement domain = new TextElement(By.xpath("//input[@placeholder='Domain']"), "domain");
@@ -35,6 +43,28 @@ public class FirstPage extends BasePage {
         com.click();
         checkbox.click();
         nextFirstPage.click();
+        Assert.assertEquals(browser.getDriver().getCurrentUrl(), "https://userinyerface.com/game.html", "second page doesn't open");
+    }
+
+    public void closeCookie() {
+        no.click();
+        Assert.assertFalse(no.isDisplayed(), "popup is displayed");
+    }
+
+    public void closeHelpForm() {
+        helpForm.click();
+        Assert.assertFalse(no.isDisplayed(), "popup is displayed");
+    }
+
+    public void counterData() {
+        String valueTimer = timer.getText();
+        System.out.println("значение таймера " + valueTimer);
+        Assert.assertNotNull(valueTimer, "value timer doesn't found");
+    }
+
+    public void updateDataTimer() {
+        JavascriptExecutor js = (JavascriptExecutor) browser.getDriver();
+        js.executeScript("timer.duration._milliseconds = 0");
     }
 
 }
