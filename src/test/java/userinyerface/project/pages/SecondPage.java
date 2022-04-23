@@ -1,38 +1,36 @@
 package userinyerface.project.pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class SecondPage extends BasePage {
-    private Button unselectAll = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[1]/div/div[3]/div/div[21]/div/span[1]/label/span"), "unselectAll");
+    private Button unselectAll = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[1]/div/div[3]/div/div[21]/div/span[1]/label/span/span"), "unselectAll");
     private Button uploadButton = new Button(By.xpath("//*[@id=\"app\"]/div//p/a"), "uploadButton");
-    private Button nextSecondPage = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[2]/div/div/div[1]/button"), "nextSecondPage");
-
+    private Button nextSecondPage = new Button(By.cssSelector("[class*='button--stroked']"), "nextSecondPage");
+    private By imageIndicator = By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[1]/div/div[2]/div/div[1]/div/div[2]");
     public SecondPage() {
     }
 
     public void selectCategories() {
         unselectAll.click();
-
-        Random random = new Random();
+        List <WebElement> interests = browser.getDriver().findElements(By.cssSelector("[class*='checkbox small']"));
+            Random random = new Random();
         for (int i = 0; i < 3; i++) {
-            Button selectInterests = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[1]/div/div[3]/div/div[" + random.nextInt(1, 20) + "]/div/span[1]/label/span"), "selectInterests");
-            selectInterests.click();
+            interests.get(random.nextInt(interests.size()-1)).click();
         }
     }
 
-    public void uploadImage() throws InterruptedException {
+    public void uploadImage() {
         uploadButton.click();
-        Thread.sleep(15000);
+        WebDriverWait wait = new WebDriverWait(browser.getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(imageIndicator));
     }
 
     public void clickNext() {
         nextSecondPage.click();
-        Assert.assertEquals(browser.getDriver().getCurrentUrl(), "https://userinyerface.com/game.html", "second page doesn't open");
     }
 }

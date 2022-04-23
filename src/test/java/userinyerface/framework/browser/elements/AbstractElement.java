@@ -5,7 +5,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
 import userinyerface.framework.browser.Browser;
 import utils.ConfigFileReader;
 import utils.Logger;
@@ -53,7 +52,6 @@ public abstract class AbstractElement {
             return findElement().getText();
         } catch (Exception e) {
             Logger.error("text doesn't be found");
-            ;
         }
         return null;
     }

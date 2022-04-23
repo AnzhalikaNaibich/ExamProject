@@ -1,23 +1,19 @@
 package userinyerface.project.pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-
 import java.util.Random;
 
 public class FirstPage extends BasePage {
-    private Button no = new Button(By.xpath("//*[@id=\"app\"]/div/div[1]/div/div[2]/div/div[1]/button"), "no");
-    private Button helpForm = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div/div/div[2]/button/span[2]"), "helpForm");
+    private Button no = new Button(By.cssSelector("[class*='button--transparent']"), "no");
+    private Button helpForm = new Button(By.cssSelector("[class*='help-form__send-to-bottom-button']"), "helpForm");
     private TextElement timer = new TextElement(By.className("timer"), "timer");
     private TextElement password = new TextElement(By.xpath("//input[@placeholder='Choose Password']"), "password");
     private TextElement email = new TextElement(By.xpath("//input[@placeholder='Your email']"), "email");
     private TextElement domain = new TextElement(By.xpath("//input[@placeholder='Domain']"), "domain");
-    private Button tld = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[1]/div/div[3]/form/div[1]/div[3]/div[4]/div/div[1]/div[2]"), "tld");
+    private Button tld = new Button(By.className("dropdown__opener"), "tld");
     private Button com = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[1]/div/div[3]/form/div[1]/div[3]/div[4]/div/div[2]/div[9]"), "com");
-    private Button checkbox = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[1]/div/div[3]/form/div[2]/span/label/span"), "checkbox");
-    private Button nextFirstPage = new Button(By.xpath("//*[@id=\"app\"]/div/div[2]/div[4]/div/div[1]/div/div[3]/form/div[3]/div[1]/a"), "nextFirstPege");
+    private Button checkbox = new Button(By.className("checkbox__check"), "checkbox");
+    private Button nextFirstPage = new Button(By.className("button--secondary"), "nextFirstPage");
 
     public FirstPage() {
     }
@@ -43,23 +39,19 @@ public class FirstPage extends BasePage {
         com.click();
         checkbox.click();
         nextFirstPage.click();
-        Assert.assertEquals(browser.getDriver().getCurrentUrl(), "https://userinyerface.com/game.html", "second page doesn't open");
     }
 
     public void closeCookie() {
         no.click();
-        Assert.assertFalse(no.isDisplayed(), "popup is displayed");
     }
 
     public void closeHelpForm() {
         helpForm.click();
-        Assert.assertFalse(no.isDisplayed(), "popup is displayed");
     }
 
     public void counterData() {
         String valueTimer = timer.getText();
         System.out.println("значение таймера " + valueTimer);
-        Assert.assertNotNull(valueTimer, "value timer doesn't found");
     }
 
     public void updateDataTimer() {

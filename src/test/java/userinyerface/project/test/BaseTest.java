@@ -10,7 +10,6 @@ public class BaseTest {
 
     @BeforeClass
     public void before(){
-        System.setProperty(config.getDriverAdapter(), config.getDriverPath());
         WebDriver driver = Browser.BROWSER.getDriver();
                 driver.manage().timeouts().implicitlyWait(15,
                 TimeUnit.SECONDS);
