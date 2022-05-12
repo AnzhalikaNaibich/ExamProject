@@ -1,11 +1,10 @@
 package userinyerface.project.pages;
-
 import org.openqa.selenium.By;
 import utils.ConfigFileReader;
 
 public class WelcomePage extends BasePage {
     private ConfigFileReader config = ConfigFileReader.configFileReader;
-    private TextElement here = new TextElement(By.xpath("//*[@id=\"app\"]/div/div/div[4]/p/a"), "here");
+    private TextElement here = new TextElement(By.xpath("//a[@Class='start__link']"), "here");
 
     public WelcomePage() {
     }
